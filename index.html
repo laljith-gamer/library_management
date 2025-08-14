@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management - User Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" id="loginForm">
+            <h2>📚 Library Management</h2>
+            <h3>User Login</h3>
+            
+            <div id="alert"></div>
+            
+            <div class="form-group">
+                <label for="party_id">Party ID:</label>
+                <input type="text" id="party_id" name="party_id" value="user123" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" value="user123" required>
+            </div>
+            
+            <button type="submit" class="btn">Login</button>
+            <a href="/admin-login" class="btn btn-secondary">Admin Login</a>
+            
+            <div style="margin-top: 20px; font-size: 12px; color: #666;">
+                <strong>Test Credentials:</strong><br>
+                User: user123 / user123<br>
+                User: user456 / pass123
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/user-dashboard.html';
+                    }, 1000);
+                } else {
+                    showAlert(result.message, 'error');
+                }
+            } catch (error) {
+                showAlert('Login failed. Please try again.', 'error');
+            }
+        });
+        
+        function showAlert(message, type) {
+            document.getElementById('alert').innerHTML = 
+                `<div class="alert alert-${type}">${message}</div>`;
+        }
+    </script>
+</body>
+</html>

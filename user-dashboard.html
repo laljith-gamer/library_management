@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management - User Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h1>📚 User Dashboard</h1>
+                <div class="user-info">
+                    <span id="userName">Welcome, User!</span>
+                    <button onclick="logout()" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+            
+            <div id="alert"></div>
+            
+            <!-- Search Section -->
+            <div class="search-section">
+                <h2>Search Books</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search by title, author, or category...">
+                    <button onclick="searchBooks()" class="btn">Search</button>
+                    <button onclick="loadAllBooks()" class="btn btn-secondary">Show All</button>
+                </div>
+            </div>
+            
+            <!-- Available Books -->
+            <div class="books-section">
+                <h2>Available Books</h2>
+                <div id="booksGrid" class="books-grid">
+                    <!-- Books will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- My Borrowed Books -->
+            <div class="borrowed-section">
+                <h2>My Borrowed Books (Max 3 at a time)</h2>
+                <div class="table-container">
+                    <table id="borrowedBooksTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Borrow Date</th>
+                                <th>Due Date</th>
+                                <th>Penalty</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Borrowed books will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/user.js"></script>
+</body>
+</html>
